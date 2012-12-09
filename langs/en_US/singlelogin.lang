@@ -1,0 +1,61 @@
+# Single Login module for Dolibarr
+# Copyright (C) 2012		Florian Henry			<florian.henry@open-concept.pro>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#
+# Generic
+#
+
+# Module label 'ModuleXXXName'
+# (where XXX is value of numeric property 'numero' of module)
+Module10055Name = Unique connexion per login
+# Module description 'ModuleXXXDesc'
+# (where XXX is value of numeric property 'numero' of module)
+Module10055Desc = Two user with the same login cannot connect at the same time
+
+#
+# Admin page
+#
+SLSetup = Unique connexion per login setup
+Settings = Settings
+SLSetupPage = Unique connexion per login setup page
+SLKillSession=Session manager (SingleLogin Module)
+SLMailAdminMandatory=Session admin user must have a email adress
+SLTimeOut=Session timeout
+SLTimeOutHelp=If user 1 let this time (in minutes) passed user 2 can login (with the same login as user 1)
+SLMinutes=Minutes
+SLAdminUser=User not control by this module (usefull to unlock deadless session)
+
+#
+# About page
+#
+About = About
+SLAbout = About Unique connexion per login
+SLAboutPage = My module Unique connexion per login
+
+#
+# Login message
+#
+SLErrContactAdmin=Another user is already logged in Dolibarr with this login. If it's an error please contact <b>%s</b> to unlock your login session.
+
+#
+# Kill session
+#
+SLUserLogin=Login
+SLLoginTime=Connection date
+SLLastAction=Last action
+SLUnlock=Unlock
+SLUnlockSession=Are you sure to delete session
+SLConfirmDelete=Session delete with succes

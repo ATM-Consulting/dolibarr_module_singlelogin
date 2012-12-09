@@ -1,0 +1,61 @@
+# Single Login module for Dolibarr
+# Copyright (C) 2012		Florian Henry			<florian.henry@open-concept.pro>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#
+# Générique
+#
+
+# Module label 'ModuleXXXName'
+# (where XXX is value of numeric property 'numero' of module)
+Module10055Name = Connexion unique par utilisateurs
+# Module description 'ModuleXXXDesc'
+# (where XXX is value of numeric property 'numero' of module)
+Module10055Desc = Activer le mode "Login Unique". Deux utilisateurs avec le même login ne peuvent être connecter en même temps.  
+
+#
+# Page d'administration
+#
+SLSetup = Configuration du module Connexion unique par utilisateurs
+Settings = Réglages
+SLSetupPage = Page de réglage de Connexion unique par utilisateurs
+SLKillSession=Gestion des sessions
+SLMailAdminMandatory=L'utilisateur administrateur de session doit avoir un mail configuré
+SLTimeOut=Temps limite d'une session
+SLTimeOutHelp=Si l'utilisateur 1 reste sans activité sur dolibarr pendant ce temps (exprimer en minutes), un utilisateur 2 (avec le même login pourra se connecté
+SLAdminUser=Utilisateur non soumis au controle de session unique par login
+SLMinutes=Minutes
+
+#
+# Page À propos
+#
+About = À propos
+SLAbout = À propos de Connexion unique par utilisateurs
+SLAboutPage = Page à propos de Connexion unique par utilisateurs
+
+#
+# Login message
+#
+SLErrContactAdmin=Un autre utilisateur est déja connecter avec ce login. Si c'est une erreur contacter <b>%s</b> pour dévérouiller la session.
+
+#
+# Kill session
+#
+SLUserLogin=Login utilisateur
+SLLoginTime=Date de connection
+SLLastAction=Derniéres action
+SLUnlock=Débloquer
+SLUnlockSession=Etes vous sure de vouloir supprimer la session ?
+SLConfirmDelete=Session supprimer avec succées
