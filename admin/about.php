@@ -30,7 +30,9 @@ if ( ! $res)
 
 // Libraries
 require_once DOL_DOCUMENT_ROOT . "/core/lib/admin.lib.php";
-require_once "../lib/singlelogin.lib.php";
+dol_include_once('/singlelogin/lib/singlelogin.lib.php');
+dol_include_once('/singlelogin/lib/PHP Markdown 1.0.1o/markdown.php');
+
 //require_once "../class/myclass.class.php";
 // Translations
 $langs->load("singlelogin@singlelogin");
@@ -63,9 +65,8 @@ dol_fiche_head($head, 'about', $langs->trans("Module10055Name"), 0,"singlelogin@
 // About page goes here
 echo $langs->trans("SLAboutPage");
 
-
 $buffer = file_get_contents(dol_buildpath('/singlelogin/README.md',0));
-print nl2br($buffer);
+print Markdown($buffer);
 
 print '<BR>';
 

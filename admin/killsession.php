@@ -39,7 +39,7 @@ $langs->load("singlelogin@singlelogin");
 $mesg=''; $error=0; $errors=array();
 
 // Access control
-if ((! $user->singlelogin->read) && (! $user->admin)) accessforbidden();
+if ((! $user->rights->singlelogin->read) && (! $user->admin)) accessforbidden();
 
 // Parameters
 $action = GETPOST('action', 'alpha');

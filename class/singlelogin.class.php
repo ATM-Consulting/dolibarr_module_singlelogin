@@ -22,16 +22,11 @@
  *  \brief      this file is use to map element_lock table to my purpose
  */
 
-// Put here all includes required by your class file
-//require_once(DOL_DOCUMENT_ROOT."/core/class/commonobject.class.php");
-//require_once(DOL_DOCUMENT_ROOT."/societe/class/societe.class.php");
-//require_once(DOL_DOCUMENT_ROOT."/product/class/product.class.php");
-
 
 /**
  *	Use to store and check login vs session
  */
-class SingleLogin// extends CommonObject
+class SingleLogin
 {
 	var $db;							//!< To store db handler
 	var $error;							//!< To return error code (or message)

@@ -62,7 +62,7 @@ class ActionsSinglelogin
 		$langs->load("singlelogin@singlelogin");
 		
 		$out = '';
-		if (($user->admin) || ($user->singlelogin->read)) {
+		if (($user->admin) || ($user->rights->singlelogin->read)) {
 			$out = '<div class="blockvmenupair">';
 			$out .= '<div class="menu_titre">';
 			$out .= '<a href="'.dol_buildpath('/singlelogin/admin/killsession.php',1).'">'.$langs->trans('SLKillSession').'</a>';

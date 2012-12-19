@@ -17,7 +17,7 @@
  */
 
 /**
- * 	\file		singlelogin/core/triggers/interface_99_modSingleLoginAtOnTime_login.class.php
+ * 	\file		singlelogin/core/triggers/interface_99_modSingleLogin_SingleLogin.class.php
  * 	\ingroup	singlelogin
  * 	\brief		Control at each login
  * 	\remarks	You can create other triggers by copying this one
@@ -106,7 +106,7 @@ class InterfaceSingleLogin
 			
 		$error=0;
 
-		if (($action == 'USER_UPDATE_SESSION') || ($action == 'USER_LOGIN')) {
+		if ((($action == 'USER_UPDATE_SESSION') || ($action == 'USER_LOGIN')) && (! defined('NOLOGIN'))) {
 		
 			$first_connec=false;
 			
@@ -152,19 +152,19 @@ class InterfaceSingleLogin
             	
             	$timeoutpassed=true;
 
-            	//If timeout is pass we let it go
             	$currenttimeconnection=abs($singlelogin->datel-$singlelogin->datem);
             	//convert date difference in minutes
             	if ($currenttimeconnection!=0){$currenttimeconnection=$currenttimeconnection/60;}
 				else {$timeoutpassed=false;}
 				
-            	dol_syslog(get_class($this).": currenttimeconnection:".$currenttimeconnection, LOG_DEBUG);
-
+            	//dol_syslog(get_class($this).": currenttimeconnection(l-m):".$currenttimeconnection, LOG_DEBUG);
+				
+            	//If timeout is pass we let it go
             	if ($currenttimeconnection>$conf->global->SINGLE_LOGIN_TIMEOUT) {
             		$timeoutpassed=false;
             	}
             	
-            	dol_syslog(get_class($this).": timeoutpassed".$timeoutpassed, LOG_DEBUG);
+            	//dol_syslog(get_class($this).": timeoutpassed".$timeoutpassed, LOG_DEBUG);
             	
             	//This is another user session 
             	if ($singlelogin->sessionid!=session_id() && (!$timeoutpassed)) {
@@ -222,7 +222,10 @@ class InterfaceSingleLogin
             
 		}
 
-		if ($action == 'USER_LOGOUT') {
+		if (($action == 'USER_LOGOUT') && (! defined('NOLOGIN'))) {
+			
+			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
+			
 			$singlelogin = new SingleLogin($this->db);
 			$result=$singlelogin->check_user($object);
 			if ($result < 0) {
