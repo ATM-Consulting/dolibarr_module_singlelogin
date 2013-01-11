@@ -101,6 +101,7 @@ class InterfaceSingleLogin
 	function run_trigger($action, $object, $user, $langs, $conf)
 	{
 		dol_include_once('/singlelogin/class/singlelogin.class.php');
+		//require_once DOL_DOCUMENT_ROOT.'/core/class/users.class.php';
 		
 		$langs->load("singlelogin@singlelogin");
 			
@@ -108,9 +109,17 @@ class InterfaceSingleLogin
 
 		if ((($action == 'USER_UPDATE_SESSION') || ($action == 'USER_LOGIN')) && (! defined('NOLOGIN'))) {
 		
+			dol_include_once('/user/class/user.class.php');
+			
 			$first_connec=false;
 			
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
+			
+			//Test if user is admin is this case we do not test at all
+			if (($object->admin)) {
+				dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is admin");
+				return 1;
+			}
 			
 			// If super admin is use
 			if ($conf->global->SINGLE_LOGIN_SUPERUSER_USE) {
@@ -121,13 +130,15 @@ class InterfaceSingleLogin
 				}
 			} else {
 				//esle control on the right management
-				if($user->rights->singlelogin->read) {
+				$currentuser=new User($this->db);
+				$result=$currentuser->fetch($object->id);
+				$currentuser->getrights('singlelogin');
+				if (($currentuser->rights->singlelogin->read)) {
 					dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged get rights->singlelogin->read");
 					return 1;
 				}
 			}
 			
-			dol_include_once('/user/class/user.class.php');
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 			
 			$singlelogin = new SingleLogin($this->db);
@@ -152,9 +163,9 @@ class InterfaceSingleLogin
             	}
             	else {
             		$first_connec=true;
+            		dol_syslog(get_class($this).": first_connec".$first_connec, LOG_DEBUG);
             	}
             }
-            dol_syslog(get_class($this).": first_connec".$first_connec, LOG_DEBUG);
             
             //The user is already logged in we have to check the session is the same
             if ((! $error) && (! $first_connect)){
@@ -177,21 +188,32 @@ class InterfaceSingleLogin
             	
             	//This is another user session 
             	if ($singlelogin->sessionid!=session_id() && (!$timeoutpassed)) {
-            		
-            		$adminuser=new User($this->db);
-            		$result=$adminuser->fetch($conf->global->SINGLE_LOGIN_SUPERUSER_ID);
-            		if ($result < 0) {
-            			$error++;
-            			$this->errors[]=$adminuser->error;
-            		}
 					
             		//redirect to login page with message to contact admin
             		unset($_SESSION["dol_login"]);
-            		if (empty($conf->global->SINGLE_LOGIN_ERRMSG)) {
-            			$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$langs->trans('SLErrContactAdmin'));
+            		
+            		// If super admin is use
+            		if ($conf->global->SINGLE_LOGIN_SUPERUSER_USE) {
+            			//We retreive the mail of administrator
+            			$adminuser=new User($this->db);
+            			$result=$adminuser->fetch($conf->global->SINGLE_LOGIN_SUPERUSER_ID);
+            			if ($result < 0) {
+            				$error++;
+            				$this->errors[]=$adminuser->error;
+            			}
+            			if (empty($conf->global->SINGLE_LOGIN_ERRMSG)) {
+            				$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$langs->trans('SLErrContactAdmin'));
+            			} else {
+            				$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$conf->global->SINGLE_LOGIN_ERRMSG);
+            			}
             		} else {
-            			$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$conf->global->SINGLE_LOGIN_ERRMSG);
+            			if (empty($conf->global->SINGLE_LOGIN_ERRMSG)) {
+            				$usererrmegs=str_replace('MAILADMIN',$langs->trans('SLUserAdmin'),$langs->trans('SLErrContactAdmin'));
+            			} else {
+            				$usererrmegs=str_replace('MAILADMIN',$langs->trans('SLUserAdmin'),$conf->global->SINGLE_LOGIN_ERRMSG);
+            			}
             		}
+            		
             		$_SESSION["dol_loginmesg"]=$usererrmegs;
             		header('Location: '.DOL_URL_ROOT.'/index.php');
             		exit;

@@ -57,6 +57,7 @@ SLAboutPage = Page à propos de Connexion unique par utilisateurs
 # Login message
 #
 SLErrContactAdmin=Un autre utilisateur est déja connecter avec ce login. Si c'est une erreur contacter <b>MAILADMIN</b> pour dévérouiller la session.
+SLUserAdmin = votre administrateur
 
 #
 # Kill session
