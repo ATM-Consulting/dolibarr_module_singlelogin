@@ -112,10 +112,19 @@ class InterfaceSingleLogin
 			
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 			
-			//If the current user is the authorize super admin, the do not do test
-			if ($object->id==$conf->global->SINGLE_LOGIN_SUPERUSER_ID) {
-				dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is SINGLE_LOGIN_SUPERUSER_ID");
-				return 1;
+			// If super admin is use
+			if ($conf->global->SINGLE_LOGIN_SUPERUSER_USE) {
+				//If the current user is the authorize super admin, the do not do test
+				if ($object->id==$conf->global->SINGLE_LOGIN_SUPERUSER_ID) {
+					dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is SINGLE_LOGIN_SUPERUSER_ID");
+					return 1;
+				}
+			} else {
+				//esle control on the right management
+				if($user->rights->singlelogin->read) {
+					dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged get rights->singlelogin->read");
+					return 1;
+				}
 			}
 			
 			dol_include_once('/user/class/user.class.php');
@@ -178,7 +187,12 @@ class InterfaceSingleLogin
 					
             		//redirect to login page with message to contact admin
             		unset($_SESSION["dol_login"]);
-            		$_SESSION["dol_loginmesg"]=$langs->trans('SLErrContactAdmin',$adminuser->email);
+            		if (empty($conf->global->SINGLE_LOGIN_ERRMSG)) {
+            			$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$langs->trans('SLErrContactAdmin'));
+            		} else {
+            			$usererrmegs=str_replace('MAILADMIN',$adminuser->email,$conf->global->SINGLE_LOGIN_ERRMSG);
+            		}
+            		$_SESSION["dol_loginmesg"]=$usererrmegs;
             		header('Location: '.DOL_URL_ROOT.'/index.php');
             		exit;
             	}

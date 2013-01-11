@@ -19,11 +19,14 @@
 #
 
 # Module label 'ModuleXXXName'
-# (where XXX is value of numeric property 'numero' of module)
 Module10055Name = Connexion unique par utilisateurs
-# Module description 'ModuleXXXDesc'
-# (where XXX is value of numeric property 'numero' of module)
 Module10055Desc = Activer le mode "Login Unique". Deux utilisateurs avec le même login ne peuvent être connecter en même temps.  
+
+#
+# Right
+#
+Permission100551 = Acces a la page de Débloquage de session
+
 
 #
 # Page d'administration
@@ -35,8 +38,13 @@ SLKillSession=Gestion des sessions
 SLMailAdminMandatory=L'utilisateur administrateur de session doit avoir un mail configuré
 SLTimeOut=Temps limite d'une session
 SLTimeOutHelp=Si l'utilisateur 1 reste sans activité sur dolibarr pendant ce temps (exprimer en minutes), un utilisateur 2 (avec le même login pourra se connecté
-SLAdminUser=Utilisateur non soumis au controle de session unique par login
 SLMinutes=Minutes
+SLAdminUser=Utilisateur non soumis au controle de session unique par login
+SLUseSuperUser=Utiliser la fonctionalité de "Utilisateur non soumis au controle de session unique par login"
+SLUseSuperUserHelp=Si cette option n'est pas activé tout les utilisateurs avec le droit "Acces a la page de Débloquage de session" ne seront pas soumis au controle de session unique par login
+SLErrContactAdminMess=Message affiché lors de l'impossibilité de se connecté
+SLErrContactAdminMessHelp=MAILADMIN sera remplacer par le mail de  l' "Utilisateur non soumis au controle de session unique par login" si cette option est activé
+
 
 #
 # Page À propos
@@ -48,7 +56,7 @@ SLAboutPage = Page à propos de Connexion unique par utilisateurs
 #
 # Login message
 #
-SLErrContactAdmin=Un autre utilisateur est déja connecter avec ce login. Si c'est une erreur contacter <b>%s</b> pour dévérouiller la session.
+SLErrContactAdmin=Un autre utilisateur est déja connecter avec ce login. Si c'est une erreur contacter <b>MAILADMIN</b> pour dévérouiller la session.
 
 #
 # Kill session

@@ -31,6 +31,7 @@ if ( ! $res)
 	
 // Libraries
 dol_include_once('/singlelogin/class/singlelogin.class.php');
+dol_include_once('/singlelogin/lib/singlelogin.lib.php');
 
 // Translations
 $langs->load("admin");
@@ -69,6 +70,8 @@ if ($action == 'confirm_delete')
 $page_name = "SLKillSession";
 llxHeader('', $langs->trans($page_name));
 
+
+
 $form=new Form($db);
 
 // Subheader
@@ -76,9 +79,13 @@ if ($user->admin) {
 	$linkback = '<a href="' . DOL_URL_ROOT . '/admin/modules.php">'
 		. $langs->trans("BackToModuleList") . '</a>';
 	print_fiche_titre($langs->trans($page_name), $linkback);
+	$head = singlelogin_admin_prepare_head();
+	dol_fiche_head($head, 'killsession', $langs->trans("Module10055Name"), 0,"singlelogin@singlelogin");
 }else {
 	print_fiche_titre($langs->trans($page_name));
 }
+
+
 
 /*
  * Confirmation de la suppression

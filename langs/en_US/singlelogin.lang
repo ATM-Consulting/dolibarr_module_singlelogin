@@ -19,11 +19,14 @@
 #
 
 # Module label 'ModuleXXXName'
-# (where XXX is value of numeric property 'numero' of module)
 Module10055Name = Unique connexion per login
-# Module description 'ModuleXXXDesc'
-# (where XXX is value of numeric property 'numero' of module)
 Module10055Desc = Two user with the same login cannot connect at the same time
+
+#
+# Right
+#
+Permission100551 = Acces to Kill Session page 
+
 
 #
 # Admin page
@@ -37,6 +40,10 @@ SLTimeOut=Session timeout
 SLTimeOutHelp=If user 1 let this time (in minutes) passed user 2 can login (with the same login as user 1)
 SLMinutes=Minutes
 SLAdminUser=User not control by this module (usefull to unlock deadless session)
+SLUseSuperUser=Use super user behavoiur
+SLUseSuperUserHelp=If this option if Off, then all user with the right "Acces to Kill Session page" (User->right->module SingleLogin->Acces to Kill Session page) will not be limited
+SLErrContactAdminMess=Message send to user when login is not possible
+SLErrContactAdminMessHelp=MAILADMIN will be replace by Admin user if define
 
 #
 # About page
@@ -48,7 +55,7 @@ SLAboutPage = My module Unique connexion per login
 #
 # Login message
 #
-SLErrContactAdmin=Another user is already logged in Dolibarr with this login. If it's an error please contact <b>%s</b> to unlock your login session.
+SLErrContactAdmin=Another user is already logged in Dolibarr with this login. If it's an error please contact <b>MAILADMIN</b> to unlock your login session.
 
 #
 # Kill session

@@ -47,7 +47,7 @@ class modSingleLogin extends DolibarrModules
 		$this->family = "other";
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = "Unique connexion per login";
-		$this->version = '1.1';
+		$this->version = '1.2';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 3;
 		$this->picto = 'singlelogin@singlelogin'; 
@@ -59,7 +59,7 @@ class modSingleLogin extends DolibarrModules
 		$this->depends = array();
 		$this->requiredby = array();
 		$this->phpmin = array(5, 3);
-		$this->need_dolibarr_version = array(3, 3);
+		$this->need_dolibarr_version = array(3, 2);
 		$this->langfiles = array("singlelogin@singlelogin"); 
 		$this->const = array(
 				0=>array(
@@ -81,6 +81,24 @@ class modSingleLogin extends DolibarrModules
 					1
 				),
 				2=>array(
+					'SINGLE_LOGIN_SUPERUSER_USE',
+					'chaine',
+					'1',
+					'if set to yes all user that have right to admin are allow to  override protection',
+					0,
+					'current',
+					1
+					),
+				3=>array(
+					'SINGLE_LOGIN_ERRMSG',
+					'chaine',
+					'',
+					'if set use this error message rather than the one set in lag files',
+					0,
+					'current',
+					1
+				),
+				4=>array(
 					'MAIN_ACTIVATE_UPDATESESSIONTRIGGER',
 					'chaine',
 					'1',
