@@ -1,0 +1,8 @@
+--------------------------------------------------------------
+English SingleLogin ChangeLog
+--------------------------------------------------------------
+
+
+***** ChangeLog for 1.2 compared to 1.1 *****
+For all:
+	- Fix bug on ajax call disbled if this module is enbled 

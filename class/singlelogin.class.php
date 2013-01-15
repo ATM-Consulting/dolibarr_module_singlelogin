@@ -538,5 +538,3 @@ class SingleLoginLine
 		return 1;
 	}
 }
-?>
-		

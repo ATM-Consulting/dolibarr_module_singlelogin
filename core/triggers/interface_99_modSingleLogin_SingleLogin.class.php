@@ -99,17 +99,28 @@ class InterfaceSingleLogin
 	 * 	@return		int						<0 if KO, 0 if no triggered ran, >0 if OK
 	 */
 	function run_trigger($action, $object, $user, $langs, $conf)
-	{
-		dol_include_once('/singlelogin/class/singlelogin.class.php');
-		//require_once DOL_DOCUMENT_ROOT.'/core/class/users.class.php';
+	{	
+		dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 		
-		$langs->load("singlelogin@singlelogin");
-			
 		$error=0;
-
-		if ((($action == 'USER_UPDATE_SESSION') || ($action == 'USER_LOGIN')) && (! defined('NOLOGIN'))) {
 		
-			dol_include_once('/user/class/user.class.php');
+		$run_this_trigger=true;
+		
+		if (defined('NOLOGIN') || defined('NOREQUIREHTML')) {
+			$run_this_trigger=false;
+		}
+		if ((!is_object($object)) || (!is_object($conf)) || (!is_object($langs))) {
+			$run_this_trigger=false;
+		}
+		
+		if ($run_this_trigger) {
+			dol_include_once('/singlelogin/class/singlelogin.class.php');
+			$langs->load("singlelogin@singlelogin");
+		}
+
+		if ((($action == 'USER_UPDATE_SESSION') || ($action == 'USER_LOGIN')) && ($run_this_trigger)) {
+		
+			dol_include_once('/core/class/users.class.php');
 			
 			$first_connec=false;
 			
@@ -258,7 +269,7 @@ class InterfaceSingleLogin
             
 		}
 
-		if (($action == 'USER_LOGOUT') && (! defined('NOLOGIN'))) {
+		if (($action == 'USER_LOGOUT') && ($run_this_trigger)) {
 			
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 			
@@ -292,7 +303,4 @@ class InterfaceSingleLogin
 		
 		return 0;
 	}
-
 }
-
-?>

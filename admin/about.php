@@ -80,4 +80,3 @@ print '<a href="'.dol_buildpath('/singlelogin/COPYING',1).'">License GPL V 3</a>
 llxFooter();
 
 $db->close();
-?>

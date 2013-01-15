@@ -47,7 +47,7 @@ class modSingleLogin extends DolibarrModules
 		$this->family = "other";
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = "Unique connexion per login";
-		$this->version = '1.2';
+		$this->version = '1.3';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 3;
 		$this->picto = 'singlelogin@singlelogin'; 
@@ -182,5 +182,3 @@ class modSingleLogin extends DolibarrModules
 	}
 
 }
-
-?>
