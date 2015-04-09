@@ -42,12 +42,12 @@ class modSingleLogin extends DolibarrModules
 
 		$this->db = $db;
 
-		$this->numero = 10055;
+		$this->numero = 103550;
 		$this->rights_class = 'singlelogin';
 		$this->family = "other";
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = "Unique connexion per login";
-		$this->version = '1.3';
+		$this->version = '1.4';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 3;
 		$this->picto = 'singlelogin@singlelogin'; 
@@ -59,7 +59,7 @@ class modSingleLogin extends DolibarrModules
 		$this->depends = array();
 		$this->requiredby = array();
 		$this->phpmin = array(5, 3);
-		$this->need_dolibarr_version = array(3, 2);
+		$this->need_dolibarr_version = array(3, 6);
 		$this->langfiles = array("singlelogin@singlelogin"); 
 		$this->const = array(
 				0=>array(
@@ -114,7 +114,10 @@ class modSingleLogin extends DolibarrModules
 		$this->tabs = array();
 
 		// Dictionnaries
-		if ( ! isset($conf->mymodule->enabled)) $conf->mymodule->enabled = 0;
+	  if (! isset($conf->singlelogin->enabled)) {
+        	$conf->singlelogin = ( object ) array ();
+            $conf->singlelogin->enabled = 0;
+        }
 		$this->dictionnaries = array();
 
 		// Boxes
@@ -124,7 +127,7 @@ class modSingleLogin extends DolibarrModules
 		// Permissions
 		$this->rights = array(); // Permission array used by this module
 		$r = 0;
-		$this->rights[$r][0] = 100551;
+		$this->rights[$r][0] = 1035501;
 		$this->rights[$r][1] = 'Admin for unlock session';
 		$this->rights[$r][3] = 0;
 		$this->rights[$r][4] = 'read';
