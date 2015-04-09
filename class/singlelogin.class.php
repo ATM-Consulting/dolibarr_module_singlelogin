@@ -214,7 +214,9 @@ class SingleLogin
 		$sql.= " t.datel,";
 		$sql.= " t.datem,";
 		$sql.= " t.sessionid,";
-		$sql.= " u.login";
+		$sql.= " u.login,";
+		$sql.= " u.lastname,";
+		$sql.= " u.firstname";
 	
 		$sql.= " FROM ".MAIN_DB_PREFIX."element_lock as t";
 		$sql.= " LEFT JOIN ".MAIN_DB_PREFIX."user as u ON u.rowid=t.fk_element";
@@ -240,6 +242,8 @@ class SingleLogin
 				$this->lines[$i]->datem = $this->db->jdate($obj->datem);
 				$this->lines[$i]->sessionid = $obj->sessionid;
 				$this->lines[$i]->login = $obj->login;
+				$this->lines[$i]->lastname = $obj->lastname;
+				$this->lines[$i]->firstname = $obj->firstname;
 				$i++;
 			}
 			$this->db->free($resql);
@@ -528,6 +532,8 @@ class SingleLoginLine
 	var $datem='';
 	var $sessionid;
 	var $login;
+	var $lastname;
+	var $firstname;
 	
 	/**
 	 *  Constructor

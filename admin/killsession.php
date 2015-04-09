@@ -118,7 +118,7 @@ foreach($singlelogin->lines as $line) {
 	else {$style='pair';}
 	
 	print '<tr class="'.$style.'">';
-	print '<td>'.$line->login.'</td>';
+	print '<td>'.$line->login.' - '.$line->lastname.' '.$line->firstname.'</td>';
 	print '<td>'.dol_print_date($line->datel,'dayhourtext').'</td>';
 	print '<td>'.dol_print_date($line->datem,'dayhourtext').'</td>';
 	print '<td><a href="'.$_SERVER['PHP_SELF'].'?action=delete&id='.$line->id.'">'.img_delete().'</a></td>';

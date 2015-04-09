@@ -106,7 +106,7 @@ class InterfaceSingleLogin
 		
 		$run_this_trigger=true;
 		
-		if (defined('NOLOGIN') || defined('NOREQUIREHTML')) {
+		if (defined('NOLOGIN') || (defined('NOREQUIREHTML') && $action!='USER_LOGOUT')) {
 			$run_this_trigger=false;
 		}
 		if ((!is_object($object)) || (!is_object($conf)) || (!is_object($langs))) {
