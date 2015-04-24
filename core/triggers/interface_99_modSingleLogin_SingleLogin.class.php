@@ -122,7 +122,7 @@ class InterfaceSingleLogin
 		
 			dol_include_once('/core/class/users.class.php');
 			
-			$first_connec=false;
+			$first_connect=false;
 			
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 			
