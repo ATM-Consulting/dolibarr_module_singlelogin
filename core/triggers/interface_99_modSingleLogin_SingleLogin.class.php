@@ -127,10 +127,10 @@ class InterfaceSingleLogin
 			dol_syslog("Trigger '" . $this->name . "' for action '$action' launched by " . __FILE__ . ". id=" . $object->id);
 			
 			//Test if user is admin is this case we do not test at all
-			if (($object->admin)) {
-				dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is admin");
-				return 1;
-			}
+			// if (($object->admin)) {
+			// 	dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is admin");
+			// 	return 1;
+			// }
 			
 			// If super admin is use
 			if ($conf->global->SINGLE_LOGIN_SUPERUSER_USE) {
@@ -139,14 +139,15 @@ class InterfaceSingleLogin
 					dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged is SINGLE_LOGIN_SUPERUSER_ID");
 					return 1;
 				}
-			} else {
-				//esle control on the right management
-				$currentuser=new User($this->db);
-				$result=$currentuser->fetch($object->id);
-				$currentuser->getrights('singlelogin');
-				if (($currentuser->rights->singlelogin->read)) {
-					dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged get rights->singlelogin->read");
-					return 1;
+				else {
+					//else control on the right management
+					$currentuser=new User($this->db);
+					$result=$currentuser->fetch($object->id);
+					$currentuser->getrights('singlelogin');
+					if (($currentuser->rights->singlelogin->read)) {
+						dol_syslog("Trigger '" . $this->name . "' for action '$action' aborted because user logged get rights->singlelogin->read");
+						return 1;
+					}
 				}
 			}
 			
