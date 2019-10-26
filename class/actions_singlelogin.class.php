@@ -69,7 +69,9 @@ class ActionsSinglelogin
 			$out .= '</div>';
 			$out .= '</div>';
 		}
-		return $out; 
+		$this->resprints = $out;
+
+		return 0; // or return 1 to replace standard code
 		
 	}
 }

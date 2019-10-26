@@ -47,7 +47,7 @@ class modSingleLogin extends DolibarrModules
 		$this->family = "other";
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = "Unique connexion per login";
-		$this->version = '1.9';
+		$this->version = '2.0';
 		$this->const_name = 'MAIN_MODULE_' . strtoupper($this->name);
 		$this->special = 3;
 		$this->picto = 'singlelogin@singlelogin'; 
@@ -83,7 +83,7 @@ class modSingleLogin extends DolibarrModules
 				2=>array(
 					'SINGLE_LOGIN_SUPERUSER_USE',
 					'chaine',
-					'1',
+					'0',
 					'if set to yes all user that have right to admin are allow to  override protection',
 					0,
 					'current',

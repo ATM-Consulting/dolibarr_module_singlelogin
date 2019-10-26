@@ -96,8 +96,8 @@ class SingleLogin
 	
 		$sql.= " ".(! isset($this->fk_element)?'NULL':"'".$this->fk_element."'").",";
 		$sql.= " ".(! isset($this->elementtype)?'NULL':"'".$this->db->escape($this->elementtype)."'").",";
-		$sql.= " ".(! isset($this->datel) || dol_strlen($this->datel)==0?'NULL':$this->db->idate($this->datel)).",";
-		$sql.= " ".(! isset($this->datem) || dol_strlen($this->datem)==0?'NULL':$this->db->idate($this->datem)).",";
+		$sql.= " ".(! isset($this->datel) || dol_strlen($this->datel)==0?'NULL':"'".$this->db->idate($this->datel)."'").",";
+		$sql.= " ".(! isset($this->datem) || dol_strlen($this->datem)==0?'NULL':"'".$this->db->idate($this->datem)."'").",";
 		$sql.= " ".(! isset($this->sessionid)?'NULL':"'".$this->db->escape($this->sessionid)."'")."";
 	
 	
